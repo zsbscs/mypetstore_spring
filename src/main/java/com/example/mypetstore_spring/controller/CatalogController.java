@@ -11,4 +11,5 @@ public class CatalogController {
     public String view(){
         return "catalog/main";
     }
+
 }

@@ -1,4 +1,4 @@
-package com.example.mypetstore_spring.presistence;
+package com.example.mypetstore_spring.persistence;
 
 import org.springframework.stereotype.Repository;
 

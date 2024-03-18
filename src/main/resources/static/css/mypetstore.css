@@ -256,8 +256,9 @@ body>#Banner {
 }
 
 #Main {
+    width: 1070px;
     margin: 0;
-    padding: 1ex;
+    padding: 0ex;
     color: #333;
     background-color: #FFF;
     border-width: 1ex 0ex 2ex 0px;
