@@ -1,10 +1,53 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" >
+    <link rel="StyleSheet" href="/css/mypetstore.css" type="text/css" media="screen"/>
     <title>Title</title>
 </head>
-<body>
 
+<body>
+<div th:replace="common/top"></div>
+<div id="BackLink">
+    <a th:href="@{'/catalog/categoryForm?categoryID='+${product.getCategoryId()}}" th:text="'Return to'+${product.getCategoryId()}">
+
+    </a>
+</div>
+
+<div id="Main">
+
+    <h2 th:text="${product.getName()}"></h2>
+
+    <table>
+        <tr>
+            <th>Item ID</th>
+            <th>Product ID</th>
+            <th>Description</th>
+            <th>List Price</th>
+            <th>&nbsp;</th>
+        </tr>
+
+            <tr th:each="item:${itemlist}">
+                <td>
+                    <a th:href="@{'/item/itemForm?itemId='+${item.getItemId()}}" th:text="${item.getItemId()}"></a>
+                </td>
+                <td th:text="${product.getProductId()}"></td>
+                <td>
+                    <div th:if="${item.getAttribute1()!=null}"  th:text="${item.getAttribute1()}+' '+${product.getName()}"></div>
+                    <div th:if="${item.getAttribute2()!=null}"  th:text="${item.getAttribute2()}+' '+${product.getName()}"></div>
+                    <div th:if="${item.getAttribute3()!=null}"  th:text="${item.getAttribute3()}+' '+${product.getName()}"></div>
+                    <div th:if="${item.getAttribute4()!=null}"  th:text="${item.getAttribute4()}+' '+${product.getName()}"></div>
+
+                </td>
+                <td th:text="${#numbers.formatCurrency(item.getListPrice())}"></td>
+                <td>
+                    <a th:href="@{'/item/addItemToCart?itemId='+${item.getItemId()}}" class="Button">Add to Cart</a>
+                </td>
+            </tr>
+        </c:forEach>
+    </table>
+
+</div>
+<div th:replace="common/bottom"></div>
 </body>
 </html>

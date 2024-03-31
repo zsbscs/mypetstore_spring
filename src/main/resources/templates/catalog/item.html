@@ -1,10 +1,63 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
+<div th:replace="common/top"></div>
+<div id="BackLink">
+    <a th:href="@{'productForm?productId='+${product.getProductId()}}" th:text="'Return to'+${product.getProductId()}">
 
+    </a>
+</div>
+
+<div id="Catalog">
+    <table>
+        <tr>
+            <td >
+                <img th:src="${img}"/>
+                <label th:text="${description}"></label>
+
+            </td>
+        </tr>
+        <tr>
+            <td><b th:text="${item.getItemId()}"></b></td>
+        </tr>
+        <tr>
+            <td>
+                <b><font size="4">
+                    <div th:if="${item.getAttribute1()!=null}"  th:text="${item.getAttribute1()}"></div>
+                    <div th:if="${item.getAttribute2()!=null}"  th:text="${item.getAttribute2()}"></div>
+                    <div th:if="${item.getAttribute3()!=null}"  th:text="${item.getAttribute3()}"></div>
+                    <div th:if="${item.getAttribute4()!=null}"  th:text="${item.getAttribute4()}"></div>
+                </font></b>
+            </td>
+        </tr>
+        <tr>
+            <td th:text="${product.getName()}"></td>
+        </tr>
+        <tr>
+            <td>
+                <div th:if="${item.getQuantity()<=0}" th:text="Back ordered."></div>
+                <div th:if="${item.getQuantity()>0}" th:text="${item.getQuantity()}+'in stock'"></div>
+            </td>
+        </tr>
+        <tr>
+            <td th:text="${#numbers.formatCurrency(item.getListPrice())}"></td>
+        </tr>
+        <tr>
+            <td>
+                <form action="/item/addItemToCart" method="POST">
+                    <input type="hidden" name="flag" id="flag" value="${sessionScope.flag+1}">
+                    <input type="hidden" name="workingItemId" value="${sessionScope.item.itemId}">
+                    <button type="submit" class="Button">Add to Cart</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div th:replace="common/bottom"></div>
 </body>
 </html>

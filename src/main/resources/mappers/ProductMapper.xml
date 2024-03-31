@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mypetstore_spring.persistence.ProductMapper">
+    <select id="getproductListByCategory" parameterType="string" resultType="Product">
+        SELECT
+            PRODUCTID,
+            NAME,
+            DESCN as description,
+            CATEGORY as categoryId
+        FROM PRODUCT
+        WHERE CATEGORY=#{categoryID}
+    </select>
+    <select id="getProduct" parameterType="string" resultType="Product">
+        SELECT
+            PRODUCTID,
+            NAME,
+            DESCN as description,
+            CATEGORY as categoryId
+        FROM PRODUCT
+        WHERE PRODUCTID=#{productID}
+    </select>
+</mapper>
